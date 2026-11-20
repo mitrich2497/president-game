@@ -17,19 +17,26 @@ function codeFromFragment(fragment){
  return rooms.length===1?roomCode(rooms[0]):'';
 }
 
-export function isVkLaunch(url){
+function launchPaths({basePath='/'}={}){
+ const path='/'+basePath.replace(/^\/+|\/+$/g,'');
+ const directory=path==='/'?path:path+'/';
+ return {directory,entry:directory+'vk.html'};
+}
+
+export function isVkLaunch(url,options){
  const id=url.searchParams.get('vk_app_id');
- return url.pathname===VK_ENTRY_PATH?(id===null||id===VK_APP_ID):url.pathname==='/'&&id===VK_APP_ID;
+ const {directory,entry}=launchPaths(options);
+ return url.pathname===entry?(id===null||id===VK_APP_ID):url.pathname===directory&&id===VK_APP_ID;
 }
-export function readRoomInvitation(url){
+export function readRoomInvitation(url,options){
  const queryCode=roomCode(url.searchParams.get('room')?.trim());
- return isVkLaunch(url)?codeFromFragment(url.hash)||queryCode:queryCode;
+ return isVkLaunch(url,options)?codeFromFragment(url.hash)||queryCode:queryCode;
 }
-export function updateRoomAddress(url,code){
+export function updateRoomAddress(url,code,options){
  const target=new URL(url),valid=roomCode(code);
  if(valid)target.searchParams.set('room',valid);else target.searchParams.delete('room');
  target.searchParams.delete('multiplayer');
- if(isVkLaunch(target))target.hash=roomFragment(valid);
+ if(isVkLaunch(target,options))target.hash=roomFragment(valid);
  return target;
 }
 export function vkRoomInvite(code){
@@ -52,9 +59,9 @@ async function sendWithTimeout(bridge,method,params){
  }finally{clearTimeout(timeout);}
 }
 
-export function createVkPlatform({url,loadBridge=loadVkBridge,onRoomInvitation,onRestore}){
- const enabled=isVkLaunch(url);
- let bridge=null,latestRoom=readRoomInvitation(url);
+export function createVkPlatform({url,basePath='/',loadBridge=loadVkBridge,onRoomInvitation,onRestore}){
+ const options={basePath},enabled=isVkLaunch(url,options);
+ let bridge=null,latestRoom=readRoomInvitation(url,options);
  const ready=enabled?loadBridge().then(async sdk=>{
   if(!sdk?.isEmbedded())return;
   sdk.subscribe(({detail})=>{
@@ -66,7 +73,7 @@ export function createVkPlatform({url,loadBridge=loadVkBridge,onRoomInvitation,o
   });
   await sendWithTimeout(sdk,'VKWebAppInit');
   bridge=sdk;
-  if(latestRoom!==readRoomInvitation(url))updateLocation();
+  if(latestRoom!==readRoomInvitation(url,options))updateLocation();
  }).catch(()=>{}):Promise.resolve();
 
  function updateLocation(){

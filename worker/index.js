@@ -5,6 +5,8 @@ import {soundtrackAsset,soundtrackResponse} from '../soundtrack.mjs';
 
 const TTL=7*86400000;
 const MAX_ROOMS=2000;
+const PAGES_ORIGIN='https://mitrich2497.github.io';
+const CORS_HEADERS=new Set(['authorization','content-type']);
 const fail=(message,status=400)=>{throw Object.assign(new Error(message),{status});};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin'}});
 
@@ -56,10 +58,9 @@ async function cleanAbandoned(db){
  return removed.meta.changes;
 }
 
-export async function roomApi(request,env,{now=Date.now(),coreOptions={}}={}){
+async function serveRoomApi(request,env,{now=Date.now(),coreOptions={}}={}){
  const url=new URL(request.url),path=url.pathname;
  try{
-  const origin=request.headers.get('origin');if(origin&&origin!==url.origin)fail('Подключайтесь со страницы игры.',403);
   if(request.method==='GET'&&path==='/api/info')return json({multiplayer:true,hosted:true,addresses:[],origin:url.origin});
   if(!env.DB)fail('Сервер комнат временно недоступен.',503);
   // Read from the primary so a guest joining from another region sees fresh moves.
@@ -133,6 +134,35 @@ export async function roomApi(request,env,{now=Date.now(),coreOptions={}}={}){
   if(!error.status)console.error('Room request failed:',error.message);
   return json({error:error.status?error.message:'Связь с хранилищем временно прервана. Повторите действие.'},error.status||503);
  }
+}
+
+export async function roomApi(request,env,options={}){
+ const url=new URL(request.url),origin=request.headers.get('origin');
+ let response;
+ if(origin&&origin!==url.origin&&origin!==PAGES_ORIGIN){
+  response=json({error:'Подключайтесь со страницы игры.'},403);
+ }else if(request.method==='OPTIONS'){
+  const method=request.headers.get('access-control-request-method');
+  const fields=(request.headers.get('access-control-request-headers')||'').split(',').map(header=>header.trim().toLowerCase()).filter(Boolean);
+  if(!origin||!['GET','POST'].includes(method)||fields.some(header=>!CORS_HEADERS.has(header))){
+   response=json({error:'Этот запрос к серверу игры не разрешён.'},403);
+  }else{
+   response=new Response(null,{status:204,headers:{
+    'Access-Control-Allow-Methods':'GET, POST',
+    'Access-Control-Allow-Headers':'Authorization, Content-Type',
+    'Access-Control-Max-Age':'600',
+    'Cache-Control':'no-store',
+    'Vary':'Access-Control-Request-Method, Access-Control-Request-Headers'
+   }});
+  }
+ }else{
+  response=await serveRoomApi(request,env,options);
+ }
+ const headers=new Headers(response.headers);
+ headers.append('Vary','Origin');
+ if(origin===PAGES_ORIGIN)headers.set('Access-Control-Allow-Origin',PAGES_ORIGIN);
+ // Room authentication uses the bearer key. Cross-origin cookies are never enabled.
+ return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }
 
 export default {

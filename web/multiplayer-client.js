@@ -44,7 +44,7 @@ function readSeat(storage,code){
   return value;
  }catch{return null;}
 }
-export function createRoomClient({storage,legacyStorage,onUpdate,onConnection,onError,onExpired,onEntryChange,onLeft,fetcher=fetch,roomCode=null}={}){
+export function createRoomClient({storage,legacyStorage,onUpdate,onConnection,onError,onExpired,onEntryChange,onLeft,fetcher=fetch,roomCode=null,apiOrigin}={}){
  const invited=validCode(String(roomCode||'').toUpperCase())?String(roomCode).toUpperCase():null;
  let credential=readSeat(storage,invited)||readSeat(legacyStorage,invited);
  let entry=readEntry(storage,invited)||readEntry(legacyStorage,invited);
@@ -76,7 +76,8 @@ export function createRoomClient({storage,legacyStorage,onUpdate,onConnection,on
  async function request(url,body,token=credential?.token){
   const controller=new AbortController(),deadline=setTimeout(()=>controller.abort(),8000);controllers.add(controller);
   try{
-   const response=await fetcher(url,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',signal:controller.signal});
+   const endpoint=apiOrigin?new URL(url,apiOrigin).href:url;
+   const response=await fetcher(endpoint,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json'}:{}),...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined,cache:'no-store',credentials:'omit',signal:controller.signal});
    let data;try{data=await response.json();}catch{throw new Error('Сервер игры временно недоступен. Подключение восстановится автоматически.');}
    if(!response.ok)throw Object.assign(new Error(data.error||'Сервер не ответил.'),{status:response.status});return data;
   }catch(error){if(error.name==='AbortError'||error instanceof TypeError)throw new Error('Нет связи с сервером. Восстанавливаем подключение…');throw error;}

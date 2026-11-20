@@ -40,6 +40,71 @@ test('VK launch accepts routed, escaped and legacy invitations before Bridge is 
  }
 });
 
+test('GitHub Pages uses its configured base path for VK invitations and room addresses',()=>{
+ const options={basePath:'/president-game/'};
+ for(const path of ['/president-game/vk.html','/president-game/']){
+  const entry=new URL('https://example.github.io'+path+'?vk_app_id=54891960&vk_user_id=123&sign=example');
+  assert(isVkLaunch(entry,options));
+  for(const fragment of ['/room/abc234','%2Froom%2Fabc234','room%3Dabc234','/?room=abc234&source=message']){
+   const launch=new URL(entry);launch.hash=fragment;
+   assert.equal(readRoomInvitation(launch,options),'ABC234');
+  }
+  const switched=updateRoomAddress(entry,'xyz789',options);
+  assert.equal(switched.pathname,path);
+  assert.equal(switched.hash,'#/room/XYZ789');
+  assert.equal(switched.searchParams.get('room'),'XYZ789');
+  assert.equal(switched.searchParams.get('sign'),'example');
+  assert.equal(switched.searchParams.get('vk_user_id'),'123');
+  assert.equal(readRoomInvitation(switched,options),'XYZ789');
+  switched.hash='';
+  assert.equal(readRoomInvitation(switched,options),'XYZ789');
+  const cleared=updateRoomAddress(switched,null,options);
+  assert.equal(cleared.hash,'');
+  assert.equal(readRoomInvitation(cleared,options),'');
+  entry.searchParams.set('vk_app_id','999');
+  assert.equal(isVkLaunch(entry,options),false);
+ }
+ assert(isVkLaunch(new URL('https://example.github.io/president-game/vk.html'),options));
+ assert(!isVkLaunch(new URL('https://example.github.io/president-game/'),options));
+ assert(!isVkLaunch(new URL('https://example.github.io/vk.html?vk_app_id=54891960'),options));
+ assert(!isVkLaunch(new URL('https://example.github.io/other/vk.html?vk_app_id=54891960'),options));
+ assert(!isVkLaunch(new URL('https://example.github.io/president-game/vk.html?vk_app_id=54891960')));
+ assert(isVkLaunch(new URL('https://example.github.io/president-game/vk.html'),{basePath:'president-game'}));
+});
+
+test('the embedded Pages entry initializes Bridge and handles incoming and outgoing rooms',async()=>{
+ const calls=[],events=[];let callback;
+ const basePath='/president-game/';
+ const url=new URL('https://example.github.io/president-game/vk.html?vk_app_id=54891960#%2Froom%2FABC234');
+ const platform=createVkPlatform({url,basePath,loadBridge:async()=>({
+  isEmbedded:()=>true,
+  subscribe:listener=>{callback=listener;},
+  send:async(method,params)=>{calls.push({method,params});return {result:true};}
+ }),onRoomInvitation:code=>events.push(code),onRestore:()=>events.push('restore')});
+ assert(platform.enabled);
+ await platform.ready;
+ assert.equal(calls[0].method,'VKWebAppInit');
+ callback({detail:{type:'VKWebAppChangeFragment',data:{location:'/room/ABC234'}}});
+ callback({detail:{type:'VKWebAppChangeFragment',data:{location:'%2Froom%2FDEF567'}}});
+ callback({detail:{type:'VKWebAppLocationChanged',data:{location:'room=XYZ789'}}});
+ callback({detail:{type:'VKWebAppViewRestore'}});
+ assert.deepEqual(events,['DEF567','XYZ789','restore']);
+ platform.setRoom('DEF567');
+ assert.deepEqual(calls[1],{method:'VKWebAppSetLocation',params:{location:'/room/DEF567',replace_state:true}});
+});
+
+test('a configured Pages entry for a different app never initializes VK Bridge',async()=>{
+ let loaded=false;
+ const platform=createVkPlatform({
+  url:new URL('https://example.github.io/president-game/vk.html?vk_app_id=999'),
+  basePath:'/president-game/',
+  loadBridge:async()=>{loaded=true;}
+ });
+ await platform.ready;
+ assert.equal(platform.enabled,false);
+ assert.equal(loaded,false);
+});
+
 test('embedded launch initializes VK, copies the room invite, and reacts to restoration and new links',async()=>{
  const events=[],calls=[];let callback;
  const platform=createVkPlatform({url:launch,loadBridge:async()=>({

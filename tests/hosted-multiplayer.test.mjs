@@ -51,6 +51,68 @@ test('public endpoints reject foreign origins, oversized bodies and creation abu
  const db=database(),a=api(db);assert.equal((await a.request('/api/rooms',{body:{},origin:'https://other.example'})).status,403);assert.equal((await a.request('/api/rooms',{body:{name:'x'.repeat(9000)}})).status,413);
  for(let i=0;i<20;i++)await create(a);assert.equal((await a.request('/api/rooms',{body:{name:'Excess'}})).status,429);assert.equal((await a.request('/api/info')).data.hosted,true);db.raw.close();
 });
+test('the GitHub Pages frontend can preflight room requests without accessing room storage',async()=>{
+ const origin='https://mitrich2497.github.io';
+ for(const [method,headers] of [['GET','authorization'],['POST','Content-Type, Authorization']]){
+  const response=await roomApi(new Request('https://game.example/api/rooms/ABC234/command',{
+   method:'OPTIONS',headers:{Origin:origin,'Access-Control-Request-Method':method,'Access-Control-Request-Headers':headers}
+  }),{});
+  assert.equal(response.status,204);
+  assert.equal(await response.text(),'');
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'),origin);
+  assert.equal(response.headers.get('Access-Control-Allow-Credentials'),null);
+  assert.match(response.headers.get('Access-Control-Allow-Methods'),/GET/);
+  assert.match(response.headers.get('Access-Control-Allow-Methods'),/POST/);
+  assert.match(response.headers.get('Access-Control-Allow-Headers'),/Authorization/i);
+  assert.match(response.headers.get('Access-Control-Allow-Headers'),/Content-Type/i);
+  assert.match(response.headers.get('Vary'),/Origin/i);
+ }
+});
+test('Pages CORS is restricted to its exact HTTPS origin and the supported API request fields',async()=>{
+ for(const origin of ['https://other.example','https://attacker.github.io','https://mitrich2497.github.io.attacker.example','http://mitrich2497.github.io','null']){
+  const request=new Request('https://game.example/api/info',{headers:{Origin:origin}});
+  const response=await roomApi(request,{});
+  assert.equal(response.status,403,origin);
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'),null);
+  const preflight=await roomApi(new Request(request,{method:'OPTIONS',headers:{Origin:origin,'Access-Control-Request-Method':'POST'}}),{});
+  assert.equal(preflight.status,403,origin);
+  assert.equal(preflight.headers.get('Access-Control-Allow-Origin'),null);
+ }
+ for(const [method,headers] of [['DELETE','authorization'],['POST','authorization,x-unapproved-header']]){
+  const response=await roomApi(new Request('https://game.example/api/rooms',{
+   method:'OPTIONS',headers:{Origin:'https://mitrich2497.github.io','Access-Control-Request-Method':method,'Access-Control-Request-Headers':headers}
+  }),{});
+  assert.equal(response.status,403);
+ }
+});
+test('Pages participants use the same rooms and bearer authentication, while API errors stay readable',async t=>{
+ const db=database();t.after(()=>db.raw.close());const origin='https://mitrich2497.github.io',a=api(db),host=await create(a);
+ const send=request=>roomApi(request,{DB:db},{now:1800000000000});
+ const joinRequest=new Request('https://game.example/api/rooms/'+host.code+'/join',{
+  method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify({name:'Друг на Pages',seat:'b'.repeat(48)})
+ });
+ const joined=await send(joinRequest);
+ assert.equal(joined.status,200);
+ assert.equal(joined.headers.get('Access-Control-Allow-Origin'),origin);
+ const guest=await joined.json();
+ assert.equal(guest.code,host.code);
+ assert.equal(guest.you,1);
+ assert.equal((await poll(a,host)).data.members.length,2);
+ const path='https://game.example/api/rooms/'+host.code;
+ const resumed=await send(new Request(path,{headers:{Origin:origin,Authorization:'Bearer '+guest.token}}));
+ assert.equal(resumed.status,200);
+ assert.equal((await resumed.json()).you,guest.you);
+ const cookieOnly=await send(new Request(path,{headers:{Origin:origin,Cookie:'token='+guest.token}}));
+ assert.equal(cookieOnly.status,401);
+ assert.equal(cookieOnly.headers.get('Access-Control-Allow-Origin'),origin);
+ assert.equal(cookieOnly.headers.get('Access-Control-Allow-Credentials'),null);
+ const absent=await send(new Request('https://game.example/api/rooms/ABC234',{headers:{Origin:origin}}));
+ assert.equal(absent.status,404);
+ assert.equal(absent.headers.get('Access-Control-Allow-Origin'),origin);
+ const sameOrigin=await roomApi(new Request('https://game.example/api/info',{headers:{Origin:'https://game.example'}}),{});
+ assert.equal(sameOrigin.status,200);
+ assert.equal(sameOrigin.headers.get('Access-Control-Allow-Origin'),null);
+});
 test('a departure transfers ownership and no old key can read the room',async()=>{
  const db=database(),a=api(db),h=await create(a),g=await join(a,h);assert.equal((await cmd(a,h,'leave')).data.left,true);assert.equal((await poll(a,h)).status,401);assert.equal((await poll(a,g)).data.host,g.you);db.raw.close();
 });

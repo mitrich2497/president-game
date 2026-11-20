@@ -71,19 +71,23 @@ let campaignPaused=false;
 document.body.classList.toggle('reduce-motion',storage.read('president.motion.v1')==='reduced');
 let busy=false,botRunning=false,selected=state.players[state.current].position,zoom=1,newPersona='catherine',newMode='bot',wheelValue=null,wheelBusy=false,stagedDice=null,stagedDicePurpose='move';
 let roomServerInfo=null,roomFaction=null,offlineCampaign=null;
-const launchUrl=new URL(location.href),inVk=!isolatedTest&&isVkLaunch(launchUrl);
-let invitationCode=readRoomInvitation(launchUrl),openingVkInvitation=false;
-if(inVk&&invitationCode)history.replaceState(history.state,'',updateRoomAddress(launchUrl,invitationCode));
+const launchUrl=new URL(location.href);
+const pagesRoomServer=document.querySelector('meta[name="president-room-server"]')?.content;
+const vkOptions={basePath:pagesRoomServer?new URL('.',import.meta.url).pathname:'/'};
+const inVk=!isolatedTest&&isVkLaunch(launchUrl,vkOptions);
+const roomApiOrigin=inVk?pagesRoomServer:undefined;
+let invitationCode=readRoomInvitation(launchUrl,vkOptions),openingVkInvitation=false;
+if(inVk&&invitationCode)history.replaceState(history.state,'',updateRoomAddress(launchUrl,invitationCode,vkOptions));
 function openVkInvitation(code){
  if(!code||code===invitationCode||openingVkInvitation)return;
  openingVkInvitation=true;network.stop();
- location.replace(updateRoomAddress(new URL(location.href),code).href);
+ location.replace(updateRoomAddress(new URL(location.href),code,vkOptions).href);
 }
-const vkPlatform=inVk?createVkPlatform({url:launchUrl,onRoomInvitation:openVkInvitation,onRestore:()=>network.reconnect()}):null;
-if(inVk)window.addEventListener('hashchange',()=>openVkInvitation(readRoomInvitation(new URL(location.href))));
+const vkPlatform=inVk?createVkPlatform({url:launchUrl,...vkOptions,onRoomInvitation:openVkInvitation,onRestore:()=>network.reconnect()}):null;
+if(inVk)window.addEventListener('hashchange',()=>openVkInvitation(readRoomInvitation(new URL(location.href),vkOptions)));
 let roomNameDraft='Игрок',roomCodeDraft=invitationCode;
 function replaceRoomAddress(code){
- const url=updateRoomAddress(new URL(location.href),code);
+ const url=updateRoomAddress(new URL(location.href),code,vkOptions);
  if(url.href!==location.href)history.replaceState(history.state,'',url);
  invitationCode=code||'';roomCodeDraft=invitationCode;
  vkPlatform?.setRoom(invitationCode);
@@ -91,7 +95,7 @@ function replaceRoomAddress(code){
 const vkUserId=inVk?launchUrl.searchParams.get('vk_user_id'):null;
 const roomStorage=isolatedTest?testStorage:createRoomStorage(()=>localStorage,vkUserId);
 const legacyRoomStorage=isolatedTest?null:createRoomStorage(()=>sessionStorage,vkUserId);
-const network=createRoomClient({storage:roomStorage,legacyStorage:legacyRoomStorage,onEntryChange:()=>{if(screen==='room')render();},onLeft:()=>{
+const network=createRoomClient({storage:roomStorage,legacyStorage:legacyRoomStorage,apiOrigin:roomApiOrigin,onEntryChange:()=>{if(screen==='room')render();},onLeft:()=>{
  replaceRoomAddress(null);roomFaction=null;openMenu();
 },onExpired:()=>{
  campaignEpoch++;busy=false;settleAnimations();settleDice();
@@ -112,9 +116,8 @@ const network=createRoomClient({storage:roomStorage,legacyStorage:legacyRoomStor
  }else{state.network={...next.network};const badge=document.querySelector('.room-game-badge');if(badge){const html=roomBadge(state);if(badge.outerHTML!==html)badge.outerHTML=html;}}
 }});
 async function openRoom(){
- const server=document.querySelector('meta[name="president-room-server"]')?.content;
- if(server){
-  const target=new URL(server);
+ if(pagesRoomServer&&!inVk){
+  const target=new URL(pagesRoomServer);
   target.searchParams.set(invitationCode?'room':'multiplayer',invitationCode||'1');
   location.assign(target.href);return;
  }
