@@ -1,0 +1,198 @@
+/* The live game surface: one board, one decision, one navigation row. */
+.arrival-edition .arrival-dock{position:relative;isolation:isolate;border:3px double #d4b473;border-radius:20px 5px;background:radial-gradient(ellipse at 25% 0,#17654b55,transparent 65%),#05291f;box-shadow:inset 0 0 0 5px #021c15,inset 0 0 0 6px #b69a5244,0 10px 30px #0004;overflow:hidden}
+.arrival-dock>.reference-texture{position:absolute;inset:0;width:100%;height:100%;opacity:.2;z-index:-1;pointer-events:none}
+.arrival-dock>.reference-corners{pointer-events:none;z-index:2}
+.arrival-edition .arrival-dock{display:flex;flex-direction:column;gap:9px;padding:15px 20px;height:100%;max-height:100%;min-height:0}
+.arrival-turn{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #d5b36d66;padding:0 0 9px;flex:none}
+.arrival-turn>span{display:flex;flex-direction:column;min-width:0;gap:1px}
+.arrival-turn small{font:500 10px/1.3 var(--body);color:#b5d4be;letter-spacing:.09em;text-transform:uppercase}
+.arrival-turn>span>strong{font:600 clamp(20px,2vw,31px)/1.05 var(--display);color:#f5dfac}
+.arrival-edition .arrival-dice.completed-roll{position:static;display:flex;flex-direction:row;justify-content:flex-end;align-items:center;gap:8px;margin:0;padding:0;border:0;background:none;box-shadow:none;flex:none}
+.arrival-edition .arrival-dice .ivory-die{--dice-size:32px;padding:6px;gap:3px}
+.arrival-edition .arrival-dice .dice-pair{gap:6px}
+.arrival-edition .arrival-dice .dice-equation{font:600 22px/1 var(--display);display:block;color:#ffe7b5;white-space:nowrap}
+.arrival-card{min-height:0;flex:1;display:flex;flex-direction:column;gap:11px;transform-origin:50% 100%}
+.arrival-heading{text-align:center;flex:none;position:relative}
+.arrival-edition .arrival-heading .location-title{display:block;padding:0;min-height:0;width:100%;margin:0;background:none;border:0;box-shadow:none;text-align:center;color:#f6dfa9}
+.arrival-heading .location-title>small{display:block!important;font:500 10px/1.3 var(--body);letter-spacing:.06em;color:#c4c5a5;margin:0!important}
+.arrival-edition .arrival-heading h2{font:600 clamp(30px,3vw,47px)/.98 var(--display);text-transform:uppercase;letter-spacing:.025em;margin:4px 0 3px;text-shadow:0 2px 6px #0009}
+.arrival-status{display:inline-block;padding:3px 16px;border-block:1px solid #d4ae6166;background:linear-gradient(90deg,transparent,#cba75b22,transparent);font:500 17px/1.2 var(--display);color:#e6d6b4}
+.arrival-art{position:relative;flex:1;min-height:90px;overflow:hidden;border:3px double #d5af69;border-radius:14px 3px;box-shadow:0 3px 15px #0005;background:#092f28;isolation:isolate}
+.arrival-art>img,.arrival-art>.deck-painting{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.arrival-art:after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 20px #02191155;border:1px solid #ffe5a455;border-radius:10px 1px}
+.arrival-light{position:absolute;inset:-20% -35%;background:linear-gradient(110deg,transparent 40%,#ffe7a577 49%,transparent 58%);opacity:0;pointer-events:none;z-index:1}
+.arrival-metrics{display:grid;gap:0;flex:none;margin:0;border-block:1px solid #ae945644}
+.arrival-metrics>div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 4px;border-bottom:1px solid #ae945633}
+.arrival-metrics>div:last-child{border-bottom:0}
+.arrival-metrics dt{font:500 20px/1.1 var(--display);color:#e4dfc5}
+.arrival-metrics dd{margin:0;font:600 23px/1.05 var(--display);color:#ffe4a0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.arrival-before{font-weight:500;color:#d5d6bb}.arrival-before>i{font-style:normal;margin:0 5px;color:#efd297}
+.arrival-edition .arrival-actions{display:flex;flex-direction:column;gap:8px;flex:none;margin:0}
+.arrival-edition .arrival-button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:49px;padding:9px 12px;border:3px double #dfbb75;border-radius:13px 3px;background:radial-gradient(ellipse at 50% 100%,#1a89663b,transparent 65%),linear-gradient(110deg,#0d654b,#073728);color:#ffebbc;box-shadow:inset 0 0 0 3px #063b2d,inset 0 0 0 4px #7eb39377,0 2px 6px #0006;cursor:pointer;transition:filter .18s,border-color .18s}
+.arrival-button>strong{font:600 clamp(21px,2vw,30px)/1.05 var(--display);white-space:normal;text-align:center;max-width:100%}
+.arrival-button>small{font:500 11px/1.2 var(--body);color:#cadac1}
+.arrival-edition .arrival-secondary{background:linear-gradient(130deg,#173d2c,#05281e);border-color:#b4975e;box-shadow:inset 0 0 0 3px #05251c,inset 0 0 0 4px #b69b5433}
+.arrival-button:hover:not(:disabled){filter:brightness(1.17);border-color:#ffe1a3}
+.arrival-button:focus-visible,.arrival-heading button:focus-visible{outline:2px solid #a7f8df;outline-offset:3px}
+.arrival-button:disabled{opacity:.48;cursor:default;filter:saturate(.6)}
+.arrival-projection{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;margin:0;font:500 17px/1.2 var(--display);color:#cbcdb2;text-align:center;flex:none}
+.arrival-projection>span{color:#ffe5ab;font-weight:600}.arrival-projection>i{font-size:6px;font-style:normal;color:#bca167}
+.arrival-outcome{margin:0;font:500 17px/1.2 var(--display);color:#cad9bf;text-align:center}.arrival-outcome b{color:#e9cd93}
+.arrival-note{margin:0;text-align:center;font:500 12px/1.35 var(--body);color:#c8ceb1;flex:none}.arrival-note strong{color:#f5d59b;font-weight:500}
+.arrival-next{border-top:1px solid #d1b05b44;padding-top:6px;color:#b6bea5;font:italic 17px/1.1 var(--display);text-align:center;flex:none}.arrival-next strong{font-style:normal;color:#eddbad;font-weight:500}
+.arrival-event-heading{display:flex;align-items:center;justify-content:center;min-height:30px}
+.arrival-deck-label{font:600 26px/1.1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:#ffe7b7}
+.arrival-detail{position:absolute;right:1px;width:28px;height:28px;border:1px solid #c9ac6b99;border-radius:50%;background:#073f32;color:#edd59d;font:italic 19px Georgia;cursor:pointer}
+.arrival-event-art{min-height:130px}
+.arrival-event-art>h2{position:absolute;bottom:10px;left:8%;right:8%;margin:0;padding:5px 12px;text-align:center;font:600 clamp(30px,3vw,44px)/1 var(--display);color:#ffe5a9;text-transform:uppercase;background:linear-gradient(110deg,#063225ee,#05261ef5);border:3px double #d7af65;border-radius:10px 3px;box-shadow:0 3px 15px #0006;z-index:2}
+.arrival-event-description{margin:0;text-align:center;font:500 19px/1.2 var(--display);color:#d7dcc1;flex:none}
+.arrival-edition .arrival-event-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.arrival-event-actions>.arrival-choice:only-child,.arrival-event-actions>.arrival-button:last-child:nth-child(3){grid-column:1/-1}
+.arrival-edition .arrival-choice{min-height:115px;padding:10px;justify-content:space-between;gap:8px}
+.arrival-choice>strong{font-size:26px}.arrival-choice>small{font:italic 17px/1.1 var(--display)}
+.arrival-choice-result{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:3px 7px;padding-top:6px;border-top:1px solid #d1b05b66;width:100%;font:600 19px/1.05 var(--display);color:#ffe5a9}
+.arrival-choice-result>i{font-size:5px;font-style:normal}.arrival-choice-result>span{white-space:nowrap}
+.arrival-route{grid-column:1/-1;display:flex;gap:12px;align-items:center;justify-content:center;padding:7px;font:600 23px/1 var(--display);text-align:center}.arrival-route span{display:flex;flex-direction:column;gap:5px}.arrival-route small{font:500 12px var(--body);color:#b9ccb4}.arrival-route i{font-style:normal;color:#dfc189}
+.arrival-travel .arrival-event-actions{grid-template-columns:1fr}
+.arrival-edition .match-journal{display:none!important}
+.arrival-edition .game-footer{display:flex;gap:12px;justify-content:flex-end;align-items:stretch;border:0}
+.arrival-edition .game-footer>.arrival-goal{margin-right:auto;align-self:center;font:500 18px/1 var(--display);color:#dac595;white-space:nowrap}
+.arrival-edition .game-footer>.arrival-goal strong{color:#ffe1a0;font-weight:600}
+.arrival-edition .game-footer>.arrival-nav{display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 20px;min-height:38px;color:#efd9a8;border:3px double #a98a4b;border-radius:10px 3px;background:linear-gradient(110deg,#0e3d2d,#04231b);font:600 21px/1 var(--display);white-space:nowrap}
+.arrival-nav svg{width:22px;height:22px;color:#ddbc78;flex:none}
+.arrival-nav .nav-long{display:inline}.arrival-nav .nav-short{display:none}
+@media(min-width:851px){
+ .arrival-edition.game-stage{max-width:1720px;grid-template-columns:minmax(0,1.35fr) minmax(330px,1fr);grid-template-rows:80px minmax(0,1fr) 42px;padding:8px 20px 8px;gap:10px 20px}
+ .arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:80px minmax(0,1fr) 20px 42px}
+ .arrival-edition .game-hud{grid-template-columns:minmax(0,1fr) 175px 36px;padding-right:50px}
+ .arrival-edition .game-hud .participant-roster{height:68px;gap:10px}
+ .arrival-edition .campaign-masthead{display:none}
+ .arrival-edition .participant-card .portrait{height:58px!important;width:49px;min-width:49px}
+ .arrival-edition .participant-copy>strong{font-size:22px}
+ .arrival-edition .reference-hud-resources{display:flex;flex-direction:column;gap:8px;font:600 23px/1 var(--display);color:#f4dfb4}
+ .arrival-edition .reference-hud-resources>span{display:flex;align-items:center;gap:7px}
+ .arrival-edition .reference-hud-resources .ui-icon{width:21px;height:21px}
+ .arrival-edition .reference-pause{display:grid}
+ .arrival-edition .board-area{grid-template-rows:minmax(0,1fr) 30px;gap:0}
+ .arrival-edition .board-area .field-heading,.arrival-edition .turn-ribbon,.arrival-edition .route-reading{display:none}
+ .arrival-edition .board-viewport{grid-row:1}
+ .arrival-edition .board-legend{grid-row:2;justify-content:center}
+ .arrival-edition .campaign-rail{justify-content:stretch}
+}
+@media(min-width:851px) and (max-height:780px){
+ .arrival-edition.game-stage{grid-template-rows:68px minmax(0,1fr) 38px;gap:6px 16px;padding:6px 16px}
+ .arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:68px minmax(0,1fr) 20px 38px}
+ .arrival-edition .game-hud .participant-roster{height:60px}.arrival-edition .participant-card .portrait{height:50px!important;width:42px;min-width:42px}
+ .arrival-edition .arrival-dock{padding:11px 16px;gap:6px}
+ .arrival-card{gap:7px}.arrival-turn{padding-bottom:6px}.arrival-turn>span>strong{font-size:23px}
+ .arrival-edition .arrival-heading h2{font-size:34px}.arrival-metrics>div{padding:6px 2px}
+ .arrival-edition .arrival-button{min-height:42px;padding:7px 10px}.arrival-button>strong{font-size:24px}
+ .arrival-status{font-size:16px}.arrival-projection,.arrival-next{font-size:16px}
+ .arrival-edition .arrival-choice{min-height:100px}.arrival-choice>strong{font-size:23px}
+ .arrival-edition .game-footer>.arrival-nav{min-height:36px;font-size:19px}
+}
+/* Portrait uses a real single-screen layout, not a shrunken desktop modal. */
+@media(max-width:850px) and (orientation:portrait){
+ .arrival-edition.game-stage,.arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-columns:minmax(0,1fr);grid-template-rows:84px minmax(0,1fr) auto 42px;gap:6px;padding:5px 8px max(5px,env(safe-area-inset-bottom))}
+ .arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:84px minmax(0,1fr) auto 17px 42px}
+ .arrival-edition .game-hud{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:53px 25px;gap:4px;padding:0;margin:0;grid-row:1}
+ .arrival-edition .campaign-masthead,.arrival-edition .reference-pause{display:none}
+ .arrival-edition.game-stage .participant-roster{height:53px;gap:4px;padding-right:28px}
+ .arrival-edition .participant-card{border:2px double #ae945b;gap:3px;padding:3px;border-radius:9px 2px;overflow:hidden;flex-direction:row;align-items:center}
+ .arrival-edition .participant-card .portrait{width:27px;min-width:27px;height:37px!important;border-radius:50%;border:1px solid #d5af6c}
+ .arrival-edition .participant-copy{min-width:0}.arrival-edition .participant-copy>strong{font:600 13px/1.05 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+ .arrival-edition .participant-values,.arrival-edition .participant-progress,.arrival-edition .participant-tags i,.arrival-edition .participant-symbol{display:none}
+ .arrival-edition .participant-tags{margin:1px 0 0;min-height:10px}.arrival-edition .participant-tags b{font:600 8px/1 var(--body);padding:1px 3px}
+ .arrival-edition .participant-number{top:0;left:1px;width:12px;height:12px;font:600 8px/1 var(--body)}
+ .arrival-edition .seats-6 .participant-card{flex-direction:column;padding:2px;gap:0}.arrival-edition .seats-6 .participant-card .portrait{width:23px;min-width:23px;height:26px!important}.arrival-edition .seats-6 .participant-copy>strong{font-size:10px}.arrival-edition .seats-6 .participant-tags{position:absolute;top:0;right:0}.arrival-edition .seats-6 .participant-tags b{font-size:6px}
+ .arrival-edition .reference-hud-resources{display:flex;align-items:center;justify-content:center;gap:18px;padding:3px 5px;border-block:1px solid #b8995855;font:600 18px/1 var(--display);color:#efdcb0}
+ .arrival-edition .reference-hud-resources>span{display:flex;align-items:center;gap:5px}.arrival-edition .reference-hud-resources .ui-icon{width:16px;height:16px}
+ .arrival-edition .board-area{grid-column:1;grid-row:2;grid-template-rows:minmax(0,1fr) 26px;gap:2px}
+ .arrival-edition .board-area .field-heading,.arrival-edition .turn-ribbon,.arrival-edition .route-reading{display:none}
+ .arrival-edition .board-viewport{grid-row:1}.arrival-edition .board-legend{grid-row:2;height:26px;gap:4px;padding:0}
+ .arrival-edition .board-legend .zoom-controls button,.arrival-edition .board-legend .compact-tactics{min-width:24px;width:24px;height:24px}
+ .arrival-edition .route-legend{font-size:6px}.arrival-edition .route-arrow{font-size:15px}
+ .arrival-edition .campaign-rail{grid-column:1;grid-row:3;display:block;min-height:0}
+ .arrival-edition .arrival-dock{height:auto;max-height:none;padding:7px 10px;gap:5px;border-radius:13px 3px}
+ .arrival-dock>.reference-corners .ref-corner{width:30px;height:30px}
+ .arrival-turn{padding-bottom:4px;gap:6px}.arrival-turn>span{flex-direction:row;align-items:baseline;gap:5px}.arrival-turn small{font-size:7px;letter-spacing:.02em}.arrival-turn>span>strong{font-size:17px}
+ .arrival-edition .arrival-dice .ivory-die{--dice-size:22px;padding:4px;gap:2px}.arrival-edition .arrival-dice .dice-pair{gap:4px}.arrival-edition .arrival-dice .dice-equation{font-size:15px}.arrival-edition .arrival-dice{gap:5px}
+ .arrival-card{gap:5px}.arrival-heading .location-title>small{display:none!important}.arrival-edition .arrival-heading h2{font-size:28px;margin:0 0 2px}.arrival-status{font-size:13px;line-height:1.05;padding:2px 6px}
+ .arrival-art{flex:none;min-height:0;height:clamp(48px,9dvh,100px);border-width:2px;border-radius:9px 2px}
+ .arrival-metrics>div{padding:4px 1px;gap:4px}.arrival-metrics dt{font-size:15px}.arrival-metrics dd{font-size:17px}.arrival-before>i{margin:0 2px}
+ .arrival-edition .arrival-actions{gap:5px}.arrival-edition .arrival-button{min-height:40px;padding:6px 9px;border-radius:9px 2px;gap:2px}.arrival-button>strong{font-size:21px;line-height:1.05}.arrival-button>small{font-size:9px}
+ .arrival-projection{font-size:13px;gap:3px;line-height:1.1}.arrival-next{font-size:12px;padding-top:4px}
+ .arrival-note{font-size:10px;line-height:1.3}.arrival-outcome{font-size:13px;line-height:1.1}
+ .arrival-event-heading{min-height:22px}.arrival-deck-label{font-size:21px;letter-spacing:.025em}.arrival-detail{height:24px;width:24px;right:0;font-size:17px}
+ .arrival-event-art{height:clamp(60px,11dvh,110px)}.arrival-event-art>h2{bottom:4px;left:12%;right:12%;font-size:25px;padding:2px 6px;border-width:2px}
+ .arrival-event-description{display:none}
+ .arrival-edition .arrival-event-actions{display:flex;flex-direction:column;gap:6px}
+ .arrival-edition .arrival-choice{min-height:57px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-rows:auto auto;padding:6px 8px;gap:2px 6px;text-align:left}
+ .arrival-choice>strong{text-align:left;font-size:20px;grid-column:1;grid-row:1}.arrival-choice>small{font-size:12px;grid-column:1;grid-row:2}
+ .arrival-choice-result{grid-column:2;grid-row:1/3;flex-direction:column;gap:3px;align-items:flex-end;justify-content:center;border:0;border-left:1px solid #b99c5066;padding:0 0 0 4px;font-size:16px;line-height:1.05}
+ .arrival-choice-result>i{display:none}.arrival-choice-result>span{white-space:normal;text-align:right}
+ .arrival-route{font-size:18px;padding:3px}.arrival-route small{font-size:10px}
+ .arrival-edition .game-footer,.arrival-edition.game-stage:has(>.scenario-ribbon)>.game-footer{grid-row:4;grid-column:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:0;margin:0;min-height:0}
+ .arrival-edition.game-stage:has(>.scenario-ribbon)>.game-footer{grid-row:5}
+ .arrival-edition.game-stage>.scenario-ribbon{grid-row:4;font-size:7px;padding:0 3px;min-height:0}.arrival-edition .scenario-ribbon>button{font-size:7px}
+ .arrival-edition .game-footer>.arrival-goal{display:none}.arrival-edition .game-footer>.arrival-nav{display:flex;flex-direction:row;min-height:40px;gap:4px;padding:4px 2px;font-size:17px;border-width:2px;border-radius:8px 2px}.arrival-nav svg{width:17px;height:17px}
+ .arrival-nav .nav-long{display:none}.arrival-nav .nav-short{display:inline}
+ body[data-screen=game] #fullscreen-toggle{width:25px;height:27px;top:8px;right:7px;border-radius:7px 2px}body[data-screen=game] #fullscreen-toggle svg{width:17px;height:17px}
+}
+@media(max-width:850px) and (orientation:portrait) and (max-height:700px){
+ .arrival-edition.game-stage,.arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:69px minmax(0,1fr) auto 36px;gap:4px;padding:4px 6px}
+ .arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:69px minmax(0,1fr) auto 15px 36px}
+ .arrival-edition .game-hud{grid-template-rows:43px 22px}.arrival-edition.game-stage .participant-roster{height:43px}.arrival-edition .participant-card .portrait{height:31px!important;width:22px;min-width:22px}.arrival-edition .participant-copy>strong{font-size:12px}
+ .arrival-edition .reference-hud-resources{font-size:16px}.arrival-edition .arrival-dock{padding:6px 8px;gap:3px}.arrival-turn>span>strong{font-size:15px}.arrival-turn small{font-size:6px}
+ .arrival-edition .arrival-heading h2{font-size:24px}.arrival-status{font-size:12px}.arrival-art{height:45px}.arrival-card{gap:4px}.arrival-event-art{height:58px}
+ .arrival-metrics>div{padding:3px 0}.arrival-metrics dt{font-size:14px}.arrival-metrics dd{font-size:16px}
+ .arrival-edition .arrival-button{min-height:36px;padding:5px 6px}.arrival-button>strong{font-size:19px}.arrival-edition .arrival-choice{min-height:52px}.arrival-choice>strong{font-size:18px}.arrival-choice-result{font-size:15px}
+ .arrival-next{font-size:11px;padding-top:3px}.arrival-projection{font-size:12px}.arrival-note{font-size:9px}.arrival-edition .game-footer>.arrival-nav{min-height:34px;font-size:15px}.arrival-nav svg{width:15px;height:15px}
+}
+@media(orientation:landscape) and (max-height:600px){
+ .arrival-edition.game-stage{grid-template-columns:minmax(0,1fr) minmax(310px,47%);grid-template-rows:52px minmax(0,1fr) 33px;gap:4px 10px;padding:4px 10px}
+ .arrival-edition.game-stage:has(>.scenario-ribbon){grid-template-rows:52px minmax(0,1fr) 17px 33px}
+ .arrival-edition .game-hud{grid-template-columns:minmax(0,1fr) 120px;gap:8px;padding-right:32px}.arrival-edition .reference-pause,.arrival-edition .campaign-masthead{display:none}.arrival-edition .game-hud .participant-roster{height:45px;gap:5px}.arrival-edition .participant-card .portrait{height:34px!important;width:26px;min-width:26px}.arrival-edition .participant-copy>strong{font-size:15px}.arrival-edition .reference-hud-resources{font-size:17px;gap:3px;display:flex;flex-direction:column}.arrival-edition .reference-hud-resources>span{display:flex;gap:4px}.arrival-edition .reference-hud-resources .ui-icon{width:15px;height:15px}
+ .arrival-edition .arrival-dock{padding:6px 10px;gap:4px;overflow-y:auto}.arrival-turn{padding-bottom:3px}.arrival-turn>span>strong{font-size:18px}.arrival-turn small{font-size:7px}.arrival-edition .arrival-dice .ivory-die{--dice-size:22px;padding:4px;gap:2px}.arrival-edition .arrival-dice .dice-equation{font-size:16px}
+ .arrival-card{gap:4px;flex:1}.arrival-edition .arrival-heading h2{font-size:26px}.arrival-heading .location-title>small{display:none!important}.arrival-status{font-size:12px;padding:1px 5px}.arrival-art{min-height:36px;flex:1}.arrival-metrics>div{padding:3px 0}.arrival-metrics dt{font-size:15px}.arrival-metrics dd{font-size:17px}
+ .arrival-edition .arrival-actions{display:flex;flex-direction:row;gap:5px}.arrival-actions>*{flex:1}.arrival-edition .arrival-button{padding:5px;min-height:35px;gap:2px}.arrival-button>strong{font-size:18px}.arrival-button>small{font-size:8px}.arrival-projection,.arrival-next{font-size:12px}.arrival-next{padding-top:3px}.arrival-outcome,.arrival-note{font-size:11px}
+ .arrival-deck-label{font-size:20px}.arrival-event-heading{min-height:20px}.arrival-event-description{display:none}.arrival-event-art{min-height:60px}.arrival-event-art>h2{font-size:24px;bottom:3px;padding:2px 5px}.arrival-detail{width:23px;height:23px;font-size:16px}.arrival-edition .arrival-choice{min-height:77px}.arrival-choice>small{font-size:12px}.arrival-choice-result{font-size:15px;gap:3px;padding-top:3px}
+ .arrival-edition .game-footer>.arrival-nav{min-height:30px;font-size:16px;padding:2px 10px;gap:5px}.arrival-nav svg{width:16px;height:16px}.arrival-edition .game-footer>.arrival-goal{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.arrival-button{transition:none}}
+body.reduce-motion .arrival-button{transition:none}
+/* Keep the roster legible without truncating the two imperial names. */
+@media(max-width:850px) and (orientation:portrait){
+ .arrival-edition.game-stage.many-players .game-hud{row-gap:4px}
+ .arrival-edition .participant-card{flex-direction:column;gap:1px;padding:2px}
+ .arrival-edition .participant-card .portrait{width:26px;min-width:26px;height:29px!important}
+ .arrival-edition .participant-copy{width:100%;text-align:center}
+ .arrival-edition .participant-copy>strong{font-size:12px;line-height:1.05}
+ .arrival-edition .participant-tags{position:absolute;top:1px;right:1px;min-height:0;margin:0}
+ .arrival-edition .participant-tags b{font-size:6px;padding:2px}
+ .arrival-edition .arrival-heading{line-height:1}
+ .arrival-edition .arrival-metrics>div{padding:3px 0;line-height:1}
+ .arrival-edition .arrival-metrics dd{line-height:1;margin:0}
+ .arrival-edition .arrival-metrics dt{line-height:1}
+}
+@media(max-width:850px) and (orientation:portrait) and (max-height:700px){
+ .arrival-edition .participant-card .portrait{height:24px!important;width:22px;min-width:22px}
+ .arrival-edition .participant-copy>strong{font-size:11px}
+}
+.arrival-edition .dock-shortcuts{display:none}
+.arrival-edition .arrival-dock .main-command>.arrival-button:before,.arrival-edition .arrival-dock .main-command>.arrival-button:after{content:none}
+@media(max-width:850px) and (orientation:portrait){
+ .arrival-edition .participant-card{display:flex}
+ .arrival-edition .arrival-city-art{height:clamp(50px,8dvh,80px)}
+}
+/* On a short phone the city art becomes a title backdrop, leaving room for
+   the board and two full touch targets instead of making the page scroll. */
+@media(max-width:850px) and (orientation:portrait) and (max-height:700px){
+ .arrival-city .arrival-card{position:relative}
+ .arrival-edition .arrival-city-art{position:absolute;top:0;left:0;right:0;height:45px;opacity:.24;z-index:-1;border:0;border-radius:5px}
+ .arrival-edition .arrival-city .arrival-actions{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:5px}
+ .arrival-city .arrival-actions>button:only-child{grid-column:1/-1}
+ .arrival-city .arrival-actions>button:last-child:nth-child(3){grid-column:1/-1}
+ .arrival-edition .arrival-city .arrival-button{min-height:42px;padding:4px 5px}
+ .arrival-city .arrival-button>strong{font-size:18px}
+}

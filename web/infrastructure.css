@@ -1,0 +1,75 @@
+/* Development belongs to the city's flag. Only rival infrastructure uses buildings. */
+.palace-brand-crest{mask-image:none;-webkit-mask-image:none;overflow:visible;background:none}
+.palace-brand-crest .palace-crest-image,.campaign-entrance .palace-crest-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;mask-image:none;-webkit-mask-image:none;opacity:1;filter:drop-shadow(0 3px 3px #0005)}
+.region-markers{font-family:'Golos',sans-serif;filter:drop-shadow(0 1px 1px #0007)}
+.map-campaign-flag{filter:drop-shadow(1px 2px 1px #001c1bad)}
+.map-campaign-flag .flag-cloth{transform-origin:6px 12px;animation:campaign-flag-breathe 5s ease-in-out infinite alternate}
+@keyframes campaign-flag-breathe{from{transform:skewY(-1deg)}to{transform:skewY(2deg)}}
+.campaign-flag{overflow:visible}
+.infrastructure-pavilion{display:block;flex-shrink:0}
+.infrastructure-dialog{width:min(1030px,calc(100vw - 34px));max-width:100%;padding:28px;color:#f3e5bf;background:radial-gradient(ellipse at 50% 0,#21584855,transparent 65%),#052b24}
+.infrastructure-dialog .modal-top{padding-bottom:18px;border-bottom:1px solid #bb9b5c70;margin-bottom:18px}
+.infrastructure-dialog .modal-top h2{font:600 clamp(28px,3.5vw,44px)/1.1 'Cormorant',Georgia,serif;color:#ffe4a7}
+.infra-intro{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.infra-intro>div:first-child{width:64px;padding:8px;background:linear-gradient(145deg,#1b5143,#062e29);border:1px solid #bc9c5b66;border-radius:15px;box-shadow:inset 0 0 20px #efd5a00c}
+.infra-intro p{margin:6px 0 0;line-height:1.5;color:#d3d9c7;font-size:14px}
+.infra-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 22px}
+.infra-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;border:1px solid #bfa36375;border-radius:10px;background:linear-gradient(180deg,#153d31,#082d27);color:#e9dec2;padding:10px;font-family:inherit;transition:background .2s,box-shadow .2s}
+.infra-tabs span{font:600 22px/1.05 'Cormorant',Georgia,serif}
+.infra-tabs small{font-size:10px;color:#c2cbb6;letter-spacing:.03em}
+.infra-tabs button[aria-pressed=true]{border-color:#e7cf92;box-shadow:inset 0 0 0 2px #d7b47144,0 0 18px #4fe7bb18;background:linear-gradient(180deg,#2b6953,#113d32)}
+.infra-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;align-items:start}
+.infra-targets h3{font:500 26px/1.1 'Cormorant',Georgia,serif;margin:0 0 12px;color:#f7dfad}
+.infra-targets{max-height:540px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#947e50 #092b25;padding:1px 5px 1px 1px}
+.infra-target{width:100%;display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:12px;align-items:center;min-height:76px;margin:0 0 8px;padding:8px;border:1px solid #aa92544d;border-radius:9px;background:#10362dbc;color:#f4e2b7;text-align:left;cursor:pointer}
+.infra-target img{width:60px;height:59px;object-fit:cover;border-radius:6px;border:1px solid #cdb27866}
+.infra-target>span{display:flex;flex-direction:column;min-width:0;gap:5px}.infra-target strong{font:600 24px/1 'Cormorant',Georgia,serif}.infra-target small{font-size:10px;line-height:1.35;color:#c8d0bf}.infra-target b{font:600 13px/1.2 'Golos',sans-serif;text-align:right;max-width:80px}
+.infra-target:hover,.infra-target.selected{border-color:#e5c479;background:linear-gradient(110deg,#2b5f49,#153a30);box-shadow:0 3px 14px #0002}
+.infra-preview{border:1px solid #bda06380;border-radius:13px;overflow:hidden;background:linear-gradient(145deg,#133d30,#06291f);box-shadow:0 10px 30px #0003;min-width:0}
+.infra-city-hero{position:relative;isolation:isolate;height:158px;padding:18px;display:flex;flex-direction:column;justify-content:end;overflow:hidden}
+.infra-city-hero:after{content:'';position:absolute;z-index:-1;inset:0;background:linear-gradient(transparent,#092e22ee)}
+.infra-city-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%;z-index:-2}
+.infra-city-hero>span{font-size:10px;letter-spacing:.2em;color:#f4d18b}
+.infra-city-hero h3{font:600 36px/1 'Cormorant',Georgia,serif;margin:7px 0 0;text-shadow:0 2px 4px #000}
+.infra-preview-body{padding:17px}
+.infra-owner{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid #c6a86940}
+.infra-owner img{width:38px;height:43px;object-fit:cover;border-radius:8px;border:1px solid #c6a86980}
+.infra-owner span{display:flex;flex-direction:column;gap:4px;font-size:10px;color:#bacabd}
+.infra-owner strong{font:600 22px/1 'Cormorant',Georgia,serif;color:#f1e0b9}
+.infra-outcome{padding:16px 0 10px}.infra-outcome>span{display:block;font-size:10px;color:#d9bc7f;letter-spacing:.08em}.infra-outcome>strong{display:block;font:600 36px/1.15 'Cormorant',Georgia,serif;margin-top:7px}.infra-outcome p,.infra-retention{font-size:12px;line-height:1.55;color:#d6dfca;margin:8px 0}
+.infra-outcome.capture>strong{color:#92f0bf}.infra-retention{padding:11px 12px;border-left:2px solid #d7b471;background:#e7cd8720;border-radius:0 7px 7px 0}
+.infra-price{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:13px 0;font-size:11px;color:#c3cebc}.infra-price strong{font-size:15px;color:#f2d494}
+.infra-preview .primary{width:100%;font-size:23px;min-height:48px;line-height:1.1}
+.infra-select-prompt{padding:70px 28px;text-align:center;color:#d0d9c7}.infra-select-prompt svg{width:95px;margin:0 auto 20px;opacity:.8}.infra-select-prompt h3{font:500 30px/1.1 'Cormorant',Georgia,serif}.infra-select-prompt p,.infra-empty{font-size:13px;line-height:1.65;color:#bfd0c1}
+.infra-empty{padding:16px;border:1px dashed #af975c60;border-radius:8px}
+.infra-footnote{font-size:11px;line-height:1.5;color:#c5cbb6;margin:18px 0 0;padding-top:14px;border-top:1px solid #a4895238}
+.city-infrastructure{margin:18px 0;padding:16px;border:1px solid #b49d6659;border-radius:10px;background:#032a25b8}
+.infra-section-heading{display:flex;align-items:center;gap:12px;justify-content:space-between}.infra-section-heading h4{font:600 25px/1.1 'Cormorant',Georgia,serif;margin:0;color:#f4dba4}.infra-section-heading>span{font-size:10px;color:#bdc9b7;white-space:nowrap}
+.city-infrastructure p{font-size:11px;line-height:1.5;color:#cdd8c5;margin:12px 0}.city-infrastructure>small{font-size:10px;line-height:1.45;color:#bacab8;display:block;margin:12px 0 0}.city-infrastructure>.secondary{width:100%;margin-top:15px}
+.infra-builder{display:grid;grid-template-columns:33px minmax(0,1fr) 84px 26px;gap:9px;align-items:center;padding:8px 0;border-bottom:1px solid #cdbb7a26}.infra-builder:last-of-type{border-bottom:0}.builder-monogram{display:grid;place-items:center;border:1px solid var(--builder-color);background:#061e1b;color:var(--builder-color);width:31px;height:34px;border-radius:5px;font:600 14px Georgia,serif}.builder-name{font:600 19px/1.1 'Cormorant',Georgia,serif;color:#f1e3bf}.infra-projects{display:flex;gap:2px}.infra-projects svg{width:26px;height:28px}.infra-builder>strong{font-size:12px;color:var(--builder-color)}
+.infra-tabs button:focus-visible,.infra-target:focus-visible{outline:2px solid #a7ffe0;outline-offset:2px}
+@media(max-width:700px){.infrastructure-dialog{width:100%;padding:18px 14px}.infrastructure-dialog .modal-top{position:sticky;top:0;background:#062d25;z-index:4;padding:12px 0;margin-top:-10px}.infra-intro{gap:12px;margin-bottom:14px}.infra-intro>div:first-child{width:48px;padding:6px}.infra-intro p{font-size:12px}.infra-tabs{gap:6px;margin-bottom:16px}.infra-tabs button{padding:8px 5px;min-height:76px}.infra-tabs span{font-size:19px}.infra-tabs small{font-size:9px}.infra-workspace{grid-template-columns:1fr;gap:16px}.infra-targets{max-height:240px}.infra-targets h3{font-size:24px}.infra-target{min-height:65px;grid-template-columns:48px minmax(0,1fr) auto;gap:10px}.infra-target img{width:48px;height:48px}.infra-target strong{font-size:23px}.infra-city-hero{height:145px}.infra-select-prompt{padding:25px}.infra-select-prompt svg{width:55px;margin-bottom:8px}.infra-select-prompt h3{margin:10px 0}.infra-select-prompt p{margin-bottom:0}.infra-preview-body{padding:15px}.city-infrastructure{padding:12px}.infra-section-heading h4{font-size:23px}.infra-builder{grid-template-columns:29px minmax(0,1fr) 68px 23px;gap:6px}.builder-monogram{width:27px;height:31px;font-size:12px}.builder-name{font-size:18px}.infra-projects svg{width:21px;height:25px}.infra-builder>strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.map-campaign-flag .flag-cloth{animation:none}}
+.reduce-motion .map-campaign-flag .flag-cloth{animation:none}
+dialog:has(.infrastructure-dialog){width:min(1040px,calc(100vw - 32px));max-width:none;border-color:#c2a66d;padding:0}
+@media(min-width:701px){
+ .infrastructure-dialog{width:100%;height:min(790px,calc(100dvh - 56px));padding:20px 24px;display:flex;flex-direction:column;overflow:hidden}
+ .infrastructure-dialog .modal-top{flex:0 0 auto;padding-bottom:10px;margin-bottom:10px}.infrastructure-dialog .modal-top h2{font-size:36px}
+ .infrastructure-workshop{display:flex;flex-direction:column;flex:1;min-height:0}
+ .infra-intro{margin-bottom:10px;gap:12px}.infra-intro>div:first-child{width:38px;padding:4px}.infra-intro p{font-size:12px;margin-top:3px}
+ .infra-tabs{margin-bottom:14px}.infra-tabs button{min-height:57px;padding:8px}.infra-tabs span{font-size:21px}
+ .infra-workspace{flex:1;min-height:0;align-items:stretch}.infra-targets{max-height:none;min-height:0}.infra-target{min-height:66px}.infra-target img{height:48px}
+ .infra-preview{overflow:auto;scrollbar-width:thin;scrollbar-color:#947e50 #092b25}
+ .infra-city-hero{height:102px;padding:13px 16px}.infra-city-hero h3{font-size:30px}.infra-preview-body{padding:12px 16px}
+ .infra-owner{padding-bottom:8px}.infra-owner img{width:30px;height:34px}.infra-owner strong{font-size:20px}
+ .infra-outcome{padding:11px 0 0}.infra-outcome>strong{font-size:30px;margin-top:3px}.infra-outcome p,.infra-retention{font-size:11px;line-height:1.45;margin:7px 0}.infra-retention{padding:8px 10px}.infra-price{margin:10px 0}
+ .infra-preview .primary{min-height:42px;font-size:22px}.infra-footnote{flex:0 0 auto;padding-top:9px;margin-top:10px}
+}
+@media(max-width:700px){dialog:has(.infrastructure-dialog){width:calc(100vw - 16px);max-height:calc(100dvh - 20px)}.infrastructure-dialog .modal-top h2{font-size:29px}.infrastructure-dialog .modal-top{padding-right:38px}.infra-preview .primary{position:relative}}
+.infra-confirm{padding:0 16px 15px;background:#0c3026}.infra-confirm .primary{margin:0}
+@media(min-width:701px){.infra-preview{display:flex;flex-direction:column;overflow:hidden}.infra-city-hero{flex:0 0 90px;height:90px}.infra-preview-body{flex:1;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#a88e57 #0a3026}.infra-confirm{flex:0 0 auto;padding:10px 16px 13px;border-top:1px solid #aa945544;box-shadow:0 -6px 16px #061e1b55}}
+@media(max-width:700px){.infra-preview{scroll-margin-top:103px}.infra-workshop .infra-confirm{padding:0 15px 15px}.infra-targets{scrollbar-gutter:stable}}
+.infra-preview .primary{font-family:var(--display);font-weight:600}
+@media(max-width:700px){.infrastructure-dialog .modal-top{position:sticky;min-height:65px;box-sizing:border-box;padding-right:40px;display:block}.infrastructure-dialog .modal-top>div{min-width:0}.infrastructure-dialog .modal-top h2{font-size:clamp(23px,7vw,29px)}.infrastructure-dialog .modal-top>.icon-button{position:absolute;right:0;top:10px}.infra-confirm .primary{font-size:24px}}
+@media(max-width:350px){.infra-city-hero{height:110px}.infra-preview-body{padding:12px}.infra-outcome{padding:12px 0 6px}.infra-outcome p,.infra-retention{font-size:11px;line-height:1.45}.infra-confirm .primary{font-size:22px;padding:10px}.infra-intro .eyebrow{font-size:8px}.infra-tabs span{font-size:18px}}
+.infra-confirm .infra-price{margin:0 0 9px}

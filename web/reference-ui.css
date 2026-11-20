@@ -1,0 +1,147 @@
+/* Illustrated city atlas and rulebook — reference edition. */
+.reference-shell{--ref-gold:#d8af62;--ref-bright:#ffe6a8;position:relative;isolation:isolate;background:radial-gradient(ellipse at 70% 0,#20574455,transparent 55%),linear-gradient(115deg,#021b15,#06382a 50%,#031d17);color:#f3ead3;overflow:hidden}
+.reference-texture{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.32;mix-blend-mode:soft-light;pointer-events:none}
+.reference-header{position:relative;display:grid;grid-template-columns:auto 1fr 70px;align-items:center;gap:20px;min-height:93px;padding:16px 26px;border-bottom:3px double #dab579;background:linear-gradient(90deg,#08251ee8,#04251d55);z-index:3}
+.reference-header h2{font:600 clamp(32px,3.5vw,54px)/1 var(--display);letter-spacing:.025em;text-align:center;color:#ffe6ae;text-shadow:0 2px #573e1c,0 5px 13px #000;margin:0}
+.reference-header-ornament{font:50px/1 Georgia;color:#d7b574;text-align:center}
+.reference-back,.reference-shell .secondary{position:relative;border:3px double #cda35e;border-radius:14px 3px;background:linear-gradient(180deg,#204a3b,#071f18);box-shadow:inset 0 0 0 2px #002219,0 3px 7px #0008;color:#ffe5ac;font:600 26px/1.1 var(--display);padding:10px 22px;text-shadow:0 2px #000;min-height:48px;cursor:pointer;transition:background .18s,box-shadow .18s}
+.reference-back:hover,.reference-shell .secondary:hover{background:linear-gradient(#3e684a,#153e2e);box-shadow:inset 0 0 0 2px #002219,0 0 14px #f5ce7033}
+.reference-back:focus-visible,.reference-shell button:focus-visible{outline:2px solid #fff0b1;outline-offset:4px}
+.reference-corners{position:absolute;inset:0;pointer-events:none;z-index:2;color:#d1a957}
+.ref-corner{position:absolute;width:54px;height:54px;fill:none;stroke:currentColor;stroke-width:1.6;filter:drop-shadow(0 2px 1px #000)}
+.ref-corner-0{left:-2px;top:-2px}.ref-corner-1{right:-2px;top:-2px;transform:scaleX(-1)}.ref-corner-2{right:-2px;bottom:-2px;transform:scale(-1)}.ref-corner-3{left:-2px;bottom:-2px;transform:scaleY(-1)}
+.development-building{display:block;width:100%;height:100%;overflow:hidden;filter:drop-shadow(0 5px 4px #0006)}
+
+/* Full illustrated city sheet, with the same responsive stages as the reference. */
+dialog:has(.palace-city-dialog){width:min(1540px,calc(100vw - 28px));max-height:calc(100svh - 24px);padding:0;border:1px solid #c19c5d;border-radius:6px;background:#031f18;box-shadow:0 25px 90px #000b}
+.palace-city-dialog>.modal-top{display:none}
+.city-reference-shell .city-journey{grid-template-columns:1.12fr 1fr;min-height:720px}
+.city-reference-shell .city-scene{min-height:720px;border:0;background:radial-gradient(ellipse at 30% 40%,#5b62405a,#061e19)}
+.city-reference-shell .city-scene-painting{opacity:1}
+.city-reference-shell .city-scene-painting img{width:100%;height:100%;object-fit:cover;object-position:52% 50%}
+.city-reference-shell .city-scene:after{background:linear-gradient(180deg,#06221bc9,transparent 48%,#04251a55)}
+.city-reference-shell .city-scene-title{top:0;padding:30px 24px;gap:14px;align-items:flex-start}
+.city-reference-shell .city-scene-title>svg{width:87px;height:115px;flex-shrink:0;filter:drop-shadow(0 4px 6px #0008)}
+.city-reference-shell .city-scene-title h2{font:600 clamp(42px,4.8vw,77px)/1 var(--display);color:#ffe6ae;text-shadow:0 2px #574323,0 4px 12px #000b;margin:7px 0 10px;text-transform:uppercase}
+.city-reference-shell .city-scene-title small{font:500 italic 22px/1.15 var(--display);text-shadow:0 2px 4px #000}
+.city-reference-shell .city-scene-title span{display:none}
+.city-reference-shell .city-story{bottom:22px;left:24px;right:24px;border:3px double #c6a264;background:#04251be0;border-radius:11px 2px;padding:15px 18px;backdrop-filter:blur(12px)}
+.city-reference-shell .city-story strong{color:#fbe0ac;font-size:27px}.city-reference-shell .city-story>small{font-size:10px;color:#dfd2af}
+.city-reference-shell .city-development{position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% 35%,#174c37bb,transparent 70%),#03251bd9;padding:26px 29px 25px;border:3px double #d0a661;gap:16px;border-radius:16px 3px;margin:10px 10px 10px 0;box-shadow:inset 0 0 55px #0008}
+.city-reference-shell .city-development>h3{font:600 clamp(32px,3vw,45px)/1 var(--display);color:#ffe3a4;text-shadow:0 2px #5c3d1b}
+.city-reference-shell .palace-flourish{color:#d5b16d;opacity:1}
+.city-reference-shell .palace-development-track{padding:0 0 3px;gap:8px;align-items:stretch;margin:0 -7px}
+.city-reference-shell .palace-development-track:before{display:block;top:auto;bottom:66px;left:13%;right:13%;height:2px;background:linear-gradient(90deg,#997039,#ffe9a5,#a77e43);z-index:-1}
+.city-reference-shell .palace-development-track>button{display:flex;align-items:center;flex-direction:column;padding:0 0 4px;border:0;border-radius:0;background:none;box-shadow:none;transition:filter .18s}
+.city-reference-shell .palace-development-track>button:hover:not(:disabled){background:none;filter:brightness(1.15);border:0}
+.city-reference-shell .palace-development-track .development-building{height:135px;margin-bottom:0;transition:filter .2s}
+.city-reference-shell .palace-development-track .selected .development-building{filter:drop-shadow(0 0 12px #73ffb844) drop-shadow(0 6px 3px #0006)}
+.city-reference-shell .palace-development-track i{height:21px;width:21px;margin:-3px auto 8px;background:#04251c;border:2px solid #e4bb72;font:12px var(--body);position:relative;box-shadow:0 0 0 3px #041e18}
+.city-reference-shell .palace-development-track .selected i{background:#108553;border-color:#fff0af;box-shadow:0 0 0 3px #083a26,0 0 15px #91ffa0}
+.city-reference-shell .palace-development-track strong{font:600 25px/1.1 var(--display);display:grid;place-items:center;width:100%;min-height:39px;border:3px double #c9a366;border-radius:12px 2px;padding:5px 7px;box-sizing:border-box;background:linear-gradient(#1a3d2d,#031b15);color:#fff0c9;text-shadow:0 1px #000}
+.city-reference-shell .palace-development-track .selected strong{background:linear-gradient(#178654,#023c2a);border-color:#ffdda0;box-shadow:0 0 8px #afff6b88,inset 0 0 0 1px #3cec9c}
+.city-reference-shell .palace-development-track small{font:10px/1.4 var(--body);margin:6px 0 0;min-height:14px;color:#e3d8b8}
+.city-reference-shell .palace-development-track .unavailable{opacity:.4;filter:grayscale(.6)}
+.city-reference-shell .city-tier-summary{gap:17px}
+.city-reference-shell .city-tier-heading{padding:9px 10px;border:3px double #c49b55;border-radius:13px 2px;box-shadow:inset 0 0 0 2px #031c15;background:linear-gradient(90deg,#08281d,#19422b88,#08281d)}
+.city-reference-shell .city-tier-heading>span{display:none}
+.city-reference-shell .city-tier-heading h4{font:600 clamp(24px,2.2vw,34px)/1.1 var(--display);text-transform:uppercase;color:#ffe2a0;margin:0;text-shadow:0 2px #3b2e17}
+.city-reference-shell .city-tier-stats{gap:14px}
+.city-reference-shell .city-tier-stats>div{border:3px double #d8b776;border-radius:15px 2px;padding:14px 7px;background:linear-gradient(110deg,#123e2a66,#001b17);box-shadow:inset 0 0 0 3px #05241b,0 5px 12px #0004}
+.city-reference-shell .city-tier-stats dt{font:500 25px/1.1 var(--display);gap:8px;padding-bottom:10px;border-bottom:1px solid #aa8f5355;color:#fff2d2}
+.city-reference-shell .city-tier-stats dt .ui-icon{width:27px;height:27px;color:#efcb7b;stroke-width:2}
+.city-reference-shell .city-tier-stats dd{font:600 clamp(32px,3.5vw,51px)/1.2 var(--display);color:#ffe3a3;text-shadow:0 2px #473116;margin:10px 0 5px}
+.city-reference-shell .city-tier-stats small{font:500 italic 19px/1.2 var(--display);color:#e6dbc0;display:block}
+.city-reference-shell .city-price{border:3px double #bb9553;border-radius:10px 2px;padding:10px 15px;background:linear-gradient(100deg,#16422d44,#002016);gap:12px;font:500 24px/1.1 var(--display);color:#f2e5c2}
+.city-reference-shell .city-price strong{font:600 34px/1 var(--display);white-space:nowrap;color:#ffe1a1}
+.city-reference-shell .city-tier-note{font:500 12px/1.5 var(--body);text-align:center;color:#cbbf9e}
+.city-reference-shell .city-condition{font:500 italic 21px/1.25 var(--display);text-align:center;color:#e7d9b3}
+.city-reference-shell .city-ability-note{font-size:12px}
+.city-reference-shell .city-development>.secondary{margin-top:auto;align-self:center;min-width:70%;padding:10px 20px;font-size:28px}
+.city-reference-shell .city-after{border:1px solid #9b844f;background:#06271d}.city-reference-shell .city-after strong{font-size:27px}
+.city-reference-shell .city-campaign-bar{border-bottom:1px solid #bf9855;background:#05281f}
+
+/* The rulebook has six working chapters, rather than baked-in text. */
+dialog:has(.reference-rules-dialog){width:min(1620px,calc(100vw - 28px));max-height:calc(100svh - 24px);padding:0;border:1px solid #b39458;border-radius:5px;background:#021d15;box-shadow:0 24px 100px #000b}
+.modal-body.reference-rules-dialog{padding:0;max-width:none}
+.reference-rules-dialog>.modal-top{display:none}
+.rulebook-shell .reference-header{border:0;padding-bottom:0;min-height:78px}
+.rulebook-subtitle{font:italic 24px var(--display);color:#e8cb8c;text-align:center;margin:0 0 13px;padding-left:170px}
+.rulebook-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:12px;padding:0 10px 12px}
+.rulebook-navigation{min-width:0;position:relative}.rulebook-navigation>summary{display:none}
+.rulebook-navigation nav{display:flex!important;flex-direction:column;gap:0;border:3px double #bb9453;border-radius:18px 3px;padding:26px 14px;position:sticky;top:12px;min-height:660px;box-shadow:inset 0 0 25px #0007}
+.rulebook-navigation button{border:0;border-bottom:1px solid #a98a4555;background:transparent;padding:23px 12px;display:flex;align-items:center;gap:17px;text-align:left;font:600 28px/1.1 var(--display);color:#f5e4b6;cursor:pointer;min-height:83px}
+.rulebook-navigation button>.ui-icon{width:32px;height:32px;flex-shrink:0;color:#e7bc66;filter:drop-shadow(0 2px 1px #000)}
+.rulebook-navigation button[aria-current]{border:3px double #ffe4a0;border-radius:15px 2px;box-shadow:0 0 13px #6ce89155,inset 0 0 10px #4fdf8e55;background:linear-gradient(110deg,#145738,#022b20);padding:20px 9px;color:#fff0c9}
+.rulebook-navigation button:hover{background-color:#2f694533}
+.rulebook-page{min-width:0;position:relative;border:3px double #b99252;border-radius:18px 3px;padding:25px 25px 18px;overflow:hidden;display:flex;flex-direction:column;gap:17px;min-height:660px;box-shadow:inset 0 0 50px #0004}
+.reference-rules-dialog h3{font:600 clamp(34px,4vw,56px)/1 var(--display);margin:0 0 12px;color:#ffe4a9;text-shadow:0 2px #473519}
+.reference-rules-dialog p{font:500 20px/1.4 var(--display);color:#ece0c6;margin:0}
+.rule-city-banner{min-height:170px;position:relative;margin:-25px -25px 0;padding:24px 25px 8px;isolation:isolate}
+.rule-city-banner>.palace-painting{position:absolute;right:0;top:0;width:58%;height:270px;z-index:-1;opacity:.93;mask-image:linear-gradient(90deg,transparent,#000 38%),linear-gradient(#000 50%,transparent);mask-composite:intersect}
+.rule-city-banner>div{width:65%;text-shadow:0 2px 5px #000}.rule-city-banner p{font:italic 23px/1.25 var(--display)}
+.rule-development-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px;position:relative;margin-top:-10px}
+.rule-development-stages>div{position:relative;min-width:0;text-align:center}
+.rule-development-stages>div+div:before{content:'→';position:absolute;left:-30px;top:48%;font:40px Georgia;color:#f6d18a;text-shadow:0 2px #000}
+.rule-development-stages .development-building{height:180px;max-width:100%}
+.rule-development-stages span{display:block;font:600 23px/1.05 var(--display);border:3px double #cea25e;border-radius:12px 2px;background:linear-gradient(#17442e,#011d15);padding:7px 5px;color:#fff0c9;min-height:44px;align-content:center}
+.reference-rules-dialog .rule-office-caption{text-align:center;font-style:italic;color:#e1cd9f}
+.rule-example{border:3px double #caa25d;border-radius:16px 3px;position:relative;padding:15px 18px;background:#082c1c77}
+.rule-example>h4{font:600 29px/1 var(--display);color:#ffe7b1;margin:0 0 14px}
+.rule-example-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:20px}
+.rule-example dl{margin:0;border:1px solid #d2b17099;border-radius:6px;overflow:hidden}
+.rule-example dl>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 13px;border-bottom:1px solid #a9905488}.rule-example dl>div:last-child{border:0}
+.rule-example dt{font:500 22px/1.1 var(--display);display:flex;align-items:center;gap:10px;color:#f6e8c5}.rule-example dt .ui-icon{width:24px;height:24px;flex-shrink:0;color:#e7bb67}
+.rule-example dd{font:500 27px var(--display);margin:0;white-space:nowrap;color:#f7e8ca}.rule-example dd i{font-style:normal;color:#e9c27b;margin:0 4px}.rule-example dd strong{color:#ffe391}
+.rule-example-cost{border:3px double #b99558;padding:12px;border-radius:11px 2px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.rule-example-cost>span{font:500 23px var(--display)}.rule-example-cost strong{font:600 39px/1 var(--display);color:#ffe2a4}
+.reference-rules-dialog .rule-callout{display:flex;align-items:center;gap:12px;font:500 19px/1.3 var(--display);padding:11px 0 0;color:#e9ddc3}.rule-callout>.ui-icon{width:24px;height:24px;color:#eac880;flex-shrink:0}
+.rulebook-page>footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:16px}.rulebook-page>footer>.palace-flourish{max-width:35%;color:#af8946}.rulebook-page>footer .secondary{font-size:25px;padding:9px 20px}
+.rule-details{border-top:1px solid #af8f5055;padding:10px 0 0;color:#d8c6a1}.rule-details summary{font:600 20px var(--display);cursor:pointer}.rule-details p{padding:10px 0;font-size:19px}
+.rule-page-intro>span{font:10px var(--body);letter-spacing:2px;color:#c6b78f}.rule-page-intro h3{margin-top:12px}.rule-page-intro p{max-width:800px;font-size:24px}
+.rule-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rule-card{display:flex;align-items:flex-start;gap:16px;border:1px solid #b99a5a66;background:linear-gradient(120deg,#19442d77,#04251a88);border-radius:12px 2px;padding:19px}
+.rule-card>.ui-icon{width:31px;height:31px;flex-shrink:0;color:#d7b270}.rule-card h4{font:600 29px/1 var(--display);color:#ffe4af;margin:0 0 10px}.rule-card p{font-size:21px;line-height:1.35}
+.rule-large-number{text-align:center;border:3px double #bb985b;border-radius:18px 2px;padding:20px;background:radial-gradient(ellipse,#34613955,transparent 70%);display:flex;flex-direction:column;gap:4px}.rule-large-number b{font:600 60px/1 var(--display);color:#ffe1a0}.rule-large-number span{font:italic 23px var(--display)}
+.rule-steps{padding:0;margin:5px 0;list-style:none;display:grid;gap:15px}.rule-steps li{display:flex;gap:24px;align-items:flex-start;padding:8px 15px;border-bottom:1px solid #b6a06544}.rule-steps li>b{font:600 44px/1 var(--display);color:#cfa95c;min-width:45px}.rule-steps h4{font:600 29px var(--display);margin:0 0 4px;color:#ffe7b8}.rule-steps p{font-size:22px}
+.rule-airport-sequence{display:flex;align-items:center;justify-content:center;gap:14px;padding:18px;border:1px solid #b19b5c66;font:600 24px var(--display);color:#ffe5b2;text-align:center}.rule-airport-sequence i{font-style:normal;color:#cea45c}
+.rule-routes{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rule-routes>div{display:flex;align-items:center;gap:15px;padding:15px;border:1px solid #bfa05b77;background:#11422c55}.rule-routes b{font:600 35px var(--display);color:#f6d488}.rule-routes span{font:600 24px/1.1 var(--display);flex:1}.rule-routes .ui-icon{width:26px;color:#b9d1b4}
+.rule-victory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.rule-victory-grid>div{border:3px double #ae8e50;border-radius:15px 2px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;background:#134a2b44}.rule-victory-grid .ui-icon{height:36px;width:36px;color:#d3b476}.rule-victory-grid b{font:600 63px/1 var(--display);color:#ffe2a3}.rule-victory-grid span{font:600 23px var(--display)}
+@media(min-width:701px) and (max-width:1150px){.rulebook-layout{grid-template-columns:190px minmax(0,1fr)}.rulebook-navigation button{font-size:24px;gap:10px;padding-left:6px;padding-right:6px}.rulebook-page{padding:20px}.rule-development-stages{gap:20px}.rule-development-stages>div+div:before{left:-21px;font-size:30px}.rule-development-stages span{font-size:19px}.rule-example-grid{grid-template-columns:1fr}.rule-example-cost{flex-direction:row;justify-content:space-between}.city-reference-shell .city-development{padding:22px 16px}.city-reference-shell .city-tier-stats dt{font-size:20px}.city-reference-shell .city-tier-stats dd{font-size:34px}.city-reference-shell .palace-development-track strong{font-size:22px}}
+@media(max-width:700px){
+ dialog:has(.palace-city-dialog),dialog:has(.reference-rules-dialog){width:100vw;max-width:100vw;height:100svh;max-height:100svh;margin:0;border:0;border-radius:0}
+ .reference-header{grid-template-columns:auto 1fr;gap:12px;min-height:66px;padding:12px 12px;position:sticky;top:0;background:#04251cf5;backdrop-filter:blur(10px);z-index:5;border-bottom:3px double #c8a362}
+ .reference-header h2{font-size:27px;letter-spacing:0}.reference-header-ornament{display:none}.reference-back{font-size:20px;min-height:38px;padding:6px 10px;border-radius:10px 2px;white-space:nowrap}.reference-back>span{display:none}
+ .ref-corner{height:37px;width:37px}.city-reference-shell .city-journey{display:flex;flex-direction:column;min-height:0}.city-reference-shell .city-scene{min-height:265px;height:265px}.city-reference-shell .city-scene-painting img{object-position:50% 65%}.city-reference-shell .city-scene:after{background:linear-gradient(#031e17a8,transparent 70%)}
+ .city-reference-shell .city-scene-title{padding:15px 14px;gap:10px}.city-reference-shell .city-scene-title>svg{width:68px;height:84px}.city-reference-shell .city-scene-title h2{font-size:43px;margin:4px 0 7px}.city-reference-shell .city-scene-title small{font-size:17px;line-height:1.1}.city-reference-shell .city-story{display:none}
+ .city-reference-shell .city-development{margin:-9px 5px 5px;border-radius:16px 3px;padding:18px 13px 20px;gap:13px;box-shadow:0 -5px 15px #0004,inset 0 0 35px #0008}.city-reference-shell .city-development>h3{font-size:36px;line-height:1.05}.city-reference-shell .city-development>.palace-flourish{height:12px}
+ .city-reference-shell .palace-development-track{gap:7px;margin:0 -3px}.city-reference-shell .palace-development-track .development-building{height:117px}.city-reference-shell .palace-development-track:before{bottom:57px}.city-reference-shell .palace-development-track strong{font-size:21px;padding:5px 2px;min-height:35px}.city-reference-shell .palace-development-track i{height:18px;width:18px;margin:-2px auto 7px;font-size:11px}.city-reference-shell .palace-development-track small{font-size:9px;margin-top:4px;min-height:13px}
+ .city-reference-shell .city-tier-heading{padding:9px 3px}.city-reference-shell .city-tier-heading h4{font-size:24px;line-height:1.05;letter-spacing:-.5px}.city-reference-shell .city-tier-summary{gap:12px}.city-reference-shell .city-tier-stats{gap:8px}.city-reference-shell .city-tier-stats>div{padding:11px 6px}.city-reference-shell .city-tier-stats dt{font-size:19px;gap:6px;padding-bottom:8px}.city-reference-shell .city-tier-stats dt .ui-icon{height:20px;width:20px}.city-reference-shell .city-tier-stats dd{font-size:34px;margin:8px 0 5px}.city-reference-shell .city-tier-stats small{font-size:16px;line-height:1.1}.city-reference-shell .city-price{padding:10px 9px;gap:8px;font-size:21px}.city-reference-shell .city-price strong{font-size:28px}.city-reference-shell .city-condition{font-size:20px}.city-reference-shell .city-tier-note{font-size:10px}.city-reference-shell .city-development>.secondary{font-size:26px;min-width:85%;padding:10px}.city-reference-shell .city-campaign-bar{padding:8px 14px}
+ .rulebook-shell .reference-header{padding-bottom:12px;min-height:66px;border-bottom:3px double #c8a362}.rulebook-shell .reference-header h2{font-size:26px}.rulebook-subtitle{display:none}.rulebook-layout{display:flex;flex-direction:column;padding:10px 7px;gap:10px}.rulebook-navigation{padding:0 5px}.rulebook-navigation>summary{display:flex;align-items:center;gap:10px;padding:12px;border:3px double #bf9c5c;border-radius:12px 2px;font:600 25px var(--display);cursor:pointer;list-style:none}.rulebook-navigation>summary::-webkit-details-marker{display:none}.rulebook-navigation>summary .ui-icon{width:26px;height:26px;color:#dfbb73}.rulebook-navigation>summary>span{margin-left:auto}.rulebook-navigation:not([open]) nav{display:none!important}.rulebook-navigation nav{position:relative;top:0;min-height:0;margin-top:8px;padding:10px}.rulebook-navigation button{min-height:54px;padding:13px 10px;font-size:25px}.rulebook-navigation button[aria-current]{padding:10px 7px}.rulebook-navigation .reference-corners{display:none}
+ .rulebook-page{padding:18px 13px;gap:16px;min-height:0}.reference-rules-dialog h3{font-size:36px;margin-bottom:10px}.reference-rules-dialog p{font-size:21px}.rule-city-banner{min-height:260px;margin:-18px -13px 0;padding:20px 15px}.rule-city-banner>.palace-painting{width:100%;height:280px;top:0;mask-image:linear-gradient(#0002,#000 70%,transparent);mask-composite:add;opacity:.8}.rule-city-banner>div{width:100%;text-align:center}.rule-city-banner p{font-size:21px;text-shadow:0 2px 4px #001f16,0 0 10px #001f16}
+ .rule-development-stages{gap:8px;margin-top:-18px}.rule-development-stages .development-building{height:100px}.rule-development-stages span{font-size:18px;padding:6px 2px;min-height:54px}.rule-development-stages>div+div:before{display:none}.reference-rules-dialog .rule-office-caption{font-size:19px}.rule-example{padding:14px 11px}.rule-example>h4{font-size:29px;text-align:center}.rule-example-grid{grid-template-columns:1fr;gap:12px}.rule-example dt{font-size:19px;gap:6px}.rule-example dt .ui-icon{height:18px;width:18px}.rule-example dl>div{padding:10px 8px;gap:8px}.rule-example dd{font-size:23px}.rule-example dd i{margin:0 2px}.rule-example-cost{flex-direction:row;gap:12px;align-items:center;padding:10px 9px}.rule-example-cost>span{font-size:22px}.rule-example-cost strong{font-size:29px;white-space:nowrap}.reference-rules-dialog .rule-callout{font-size:19px;align-items:flex-start;gap:9px}.rule-callout>.ui-icon{height:19px;width:19px}.rule-details summary{font-size:21px}.rulebook-page>footer>.palace-flourish{display:none}.rulebook-page>footer{justify-content:stretch}.rulebook-page>footer .secondary{width:100%;font-size:26px;white-space:normal}
+ .rule-card-grid{grid-template-columns:1fr;gap:12px}.rule-card{padding:15px 13px;gap:13px}.rule-card h4{font-size:27px}.rule-card p{font-size:21px}.rule-card>.ui-icon{height:25px;width:25px}.rule-large-number b{font-size:48px}.rule-large-number span{font-size:22px}.rule-page-intro p{font-size:23px}.rule-steps li{gap:13px;padding:8px 4px}.rule-steps li>b{font-size:33px;min-width:34px}.rule-steps h4{font-size:28px}.rule-steps p{font-size:22px}.rule-airport-sequence{font-size:20px;padding:12px 6px;gap:7px}.rule-routes{grid-template-columns:1fr}.rule-routes span{font-size:24px}.rule-victory-grid{gap:8px}.rule-victory-grid>div{padding:16px 5px}.rule-victory-grid b{font-size:40px}.rule-victory-grid span{font-size:20px}
+}
+@media(max-width:360px){.reference-header{gap:8px;padding:11px 9px}.reference-header h2{font-size:23px}.reference-back{font-size:18px;padding:6px 9px}.city-reference-shell .city-scene{height:230px;min-height:230px}.city-reference-shell .city-scene-title h2{font-size:37px}.city-reference-shell .city-scene-title>svg{width:54px;height:70px}.city-reference-shell .city-development{padding:17px 9px}.city-reference-shell .palace-development-track .development-building{height:96px}.city-reference-shell .palace-development-track strong{font-size:19px}.city-reference-shell .city-tier-heading h4{font-size:21px}.city-reference-shell .city-tier-stats dt{font-size:17px;gap:4px}.city-reference-shell .city-tier-stats dt .ui-icon{width:17px;height:17px}.city-reference-shell .city-tier-stats dd{font-size:29px}.city-reference-shell .city-tier-stats small{font-size:15px}.city-reference-shell .city-price{font-size:19px}.city-reference-shell .city-price strong{font-size:25px}.rulebook-page{padding:16px 10px}.rule-development-stages span{font-size:16px}.rule-example dt{font-size:17px}.rule-example dd{font-size:21px}.rule-example dt .ui-icon{display:none}.rule-example-cost>span{font-size:19px}.rule-example-cost strong{font-size:26px}.rulebook-shell .reference-header h2{font-size:23px}}
+@media(prefers-reduced-motion:reduce){.reference-shell *{transition:none!important}}
+.reference-texture{opacity:.75;mix-blend-mode:soft-light}
+.rulebook-page>footer .secondary{width:auto;min-width:230px}
+.rule-example>.reference-corners .ref-corner{height:32px;width:32px}
+@media(max-width:700px){.rulebook-page>footer .secondary{width:100%;min-width:0}}
+@media(min-width:701px) and (max-height:1050px){
+ .city-reference-shell .city-development{padding:18px 24px;gap:10px}.city-reference-shell .city-development>h3{font-size:37px}.city-reference-shell .city-development>.palace-flourish{height:12px}
+ .city-reference-shell .palace-development-track .development-building{height:108px}.city-reference-shell .palace-development-track strong{font-size:24px;min-height:36px}.city-reference-shell .palace-development-track:before{bottom:63px}
+ .city-reference-shell .city-tier-heading h4{font-size:28px}.city-reference-shell .city-tier-heading{padding:8px}.city-reference-shell .city-tier-summary{gap:12px}
+ .city-reference-shell .city-tier-stats>div{padding:10px 7px}.city-reference-shell .city-tier-stats dt{font-size:23px;padding-bottom:7px}.city-reference-shell .city-tier-stats dd{font-size:43px;margin:7px 0 4px}.city-reference-shell .city-tier-stats small{font-size:18px}
+ .city-reference-shell .city-price{padding:8px 12px;font-size:22px}.city-reference-shell .city-price strong{font-size:30px}.city-reference-shell .city-tier-note{font-size:10px;line-height:1.4}.city-reference-shell .city-condition{font-size:20px;line-height:1.2}.city-reference-shell .city-development>.secondary{font-size:25px;min-height:44px;padding:8px 16px}
+}
+@media(max-width:700px){.city-reference-shell .reference-header{min-height:58px}.city-reference-shell .city-scene{height:220px;min-height:220px}.city-reference-shell .city-development{gap:11px}.city-reference-shell .city-development>h3{font-size:31px}.city-reference-shell .palace-development-track .development-building{height:95px}.city-reference-shell .palace-development-track strong{font-size:20px}.city-reference-shell .city-tier-heading h4{font-size:22px}.city-reference-shell .city-tier-stats dd{font-size:33px}.city-reference-shell .city-price{font-size:20px}.city-reference-shell .city-condition{font-size:19px}}
+.city-reference-shell .city-scene-title>div{min-width:0;flex:1;display:flex;flex-direction:column}
+.city-reference-shell .city-scene-title h2{order:1}
+.city-reference-shell .city-scene-title small{order:2;white-space:normal}
+.reference-header{grid-template-columns:auto minmax(0,1fr) 70px}
+@media(max-width:700px){.reference-header{grid-template-columns:auto minmax(0,1fr)}.city-reference-shell .city-tier-stats dt{min-height:45px;box-sizing:border-box}.city-reference-shell .city-scene-title small{font-size:17px}.city-reference-shell .city-scene-title h2{margin-top:0}}
+.rule-development-stages .stage-short{display:none}
+@media(max-width:700px){.rule-development-stages .stage-long{display:none}.rule-development-stages .stage-short{display:block;min-height:38px;font-size:21px}}
+@media(max-width:360px){.rule-development-stages .stage-short{font-size:19px}}
+.reference-shell{overflow:clip}

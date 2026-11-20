@@ -1,0 +1,27 @@
+// Architectural art direction for the game's stylized city miniatures.
+export const CITY_ART={
+ 1:{city:'Москва',motif:'Кремлёвские башни',district:'ЦФО',color:0x9f3745},
+ 3:{city:'Воронеж',motif:'Соборная площадь',district:'ЦФО',color:0x9f3745},
+ 5:{city:'Ярославль',motif:'Храмы над Волгой',district:'ЦФО',color:0x9f3745},
+ 7:{city:'Тюмень',motif:'Мост и набережная',district:'УФО',color:0xba803e},
+ 9:{city:'Челябинск',motif:'Индустриальный город',district:'УФО',color:0xba803e},
+ 11:{city:'Екатеринбург',motif:'Дворец и городской силуэт',district:'УФО',color:0xba803e},
+ 13:{city:'Архангельск',motif:'Северный порт',district:'СЗФО',color:0x378caa},
+ 15:{city:'Санкт-Петербург',motif:'Разводной мост над Невой',district:'СЗФО',color:0x378caa},
+ 17:{city:'Калининград',motif:'Кирпичная готика',district:'СЗФО',color:0x378caa},
+ 19:{city:'Омск',motif:'Собор с синими куполами',district:'СФО',color:0x386b9c},
+ 21:{city:'Новосибирск',motif:'Купол оперного театра',district:'СФО',color:0x386b9c},
+ 23:{city:'Красноярск',motif:'Мост у сибирских сопок',district:'СФО',color:0x386b9c},
+ 25:{city:'Улан-Удэ',motif:'Буддийская архитектура',district:'ДФО',color:0x31846a},
+ 27:{city:'Хабаровск',motif:'Золотые купола над Амуром',district:'ДФО',color:0x31846a},
+ 29:{city:'Владивосток',motif:'Вантовый мост и бухта',district:'ДФО',color:0x31846a},
+ 31:{city:'Махачкала',motif:'Мечеть и горный горизонт',district:'СКФО',color:0x80639e},
+ 33:{city:'Грозный',motif:'Минареты и современные башни',district:'СКФО',color:0x80639e},
+ 35:{city:'Пятигорск',motif:'Колоннада среди гор',district:'СКФО',color:0x80639e},
+ 37:{city:'Севастополь',motif:'Приморская колонна',district:'ЮФО',color:0x3b8e80},
+ 39:{city:'Ростов-на-Дону',motif:'Купола и городские фасады',district:'ЮФО',color:0x3b8e80},
+ 41:{city:'Волгоград',motif:'Монумент на кургане',district:'ЮФО',color:0x3b8e80},
+ 43:{city:'Самара',motif:'Монумент и волжский берег',district:'ПФО',color:0xa34c73},
+ 45:{city:'Казань',motif:'Бирюзовые минареты',district:'ПФО',color:0xa34c73},
+ 47:{city:'Нижний Новгород',motif:'Кремль над рекой',district:'ПФО',color:0xa34c73}
+};

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="180" viewBox="0 0 300 180" fill="none">
+<defs><linearGradient id="gold" x1="0" y1="0" x2="0" y2="180" gradientUnits="userSpaceOnUse"><stop stop-color="#fff0bc"/><stop offset=".08" stop-color="#d5a650"/><stop offset=".22" stop-color="#805620"/><stop offset=".47" stop-color="#f6d383"/><stop offset=".58" stop-color="#fff5c9"/><stop offset=".76" stop-color="#986427"/><stop offset=".94" stop-color="#e8c17b"/><stop offset="1" stop-color="#715022"/></linearGradient></defs>
+<path d="M16 2H284L298 16V164L284 178H16L2 164V16Z" stroke="#1f1506" stroke-width="4"/>
+<path d="M16 2H284L298 16V164L284 178H16L2 164V16Z" stroke="url(#gold)" stroke-width="3"/>
+<path d="M17 6H283L294 17V163L283 174H17L6 163V17Z" stroke="#ffdf93" stroke-width=".9"/>
+<path d="M19 10H281L290 19V161L281 170H19L10 161V19Z" stroke="#6b471d" stroke-width="1.5"/>
+<path d="M18 12H282M12 18V162M18 168H282M288 18V162" stroke="#ebce8d" stroke-width=".5" opacity=".9"/>
+<path d="M7 29Q30 30 29 7M293 29Q270 30 271 7M7 151Q30 150 29 173M293 151Q270 150 271 173" stroke="url(#gold)" stroke-width="1.7"/>
+<path d="m15 15 6 2-4 4Zm270 0-6 2 4 4ZM15 165l6-2-4-4Zm270 0-6-2 4-4Z" fill="#edc67a"/>
+</svg>

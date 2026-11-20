@@ -1,0 +1,7 @@
+{
+  "purpose": "Transparent replacement for cropped main menu crest",
+  "tool": "image_gen",
+  "transparent_background": true,
+  "reference": "../interface-v14/main-menu.png",
+  "prompt": "Use case: background-extraction / precise-object-edit. From the provided Russian game main-menu artwork, extract and refine ONLY the small GOLD DOUBLE-HEADED EAGLE HERALDIC ORNAMENT ABOVE the word ПРЕЗИДЕНТ at the top left. Create a standalone finished UI emblem asset on a TRUE TRANSPARENT ALPHA BACKGROUND. Preserve the complete double-headed eagle, central shield, three small crowns, spread feathered wings, gold scepter/orb if visible, and symmetrical curved gold laurel flourish extending under it to both sides. Render at high detail as refined antique warm gold with gentle highlights, crisp edges. Tight but safe bounding composition centered with about8%clearalpha padding allaround; landscape2:1aspect. No clipped crowns, feather tips or bottom leaves. No title, NO TEXT, no letters, no frame, no wall, no green velvet or emerald rectangle, no haze, no gradient background, no cast shadow outside the emblem, no opaque dark patch, no checkerboard drawn into pixels. All empty areas between feathers and around the ornament must be truly transparent, not painted black/green. The gold emblem will be laid over different backgrounds in a live game. Output PNG with alpha."
+}
